@@ -32,6 +32,35 @@ class pxtheme_custom_funcs{
 	}
 
 	/**
+	 * グローバルナビのHTMLソースを生成
+	 */
+	public function mk_html_gnavi( $top_page_id, $depth = 0 ){
+		if( $depth > 3 ){
+			// 階層が深すぎる場合はスキップ
+			//   ※この数値を変更すると、最大深度を変えられます。
+			return '';
+		}
+		$rtn = '';
+
+		$local_children = $this->px->site()->get_children( $top_page_id );
+		if( count($local_children) ){
+			$rtn .= '<ul>'."\n";
+			foreach( $local_children as $local_child_page_id ){
+				$local_child_page_info = $this->px->site()->get_page_info($local_child_page_id);
+				$rtn .= '<li>';
+				$rtn .= $this->px->theme()->mk_link($local_child_page_info['path']);
+				if( $this->px->site()->is_page_in_breadcrumb( $local_child_page_info['id'] ) ){
+					$rtn .= $this->mk_html_gnavi( $local_child_page_info['id'], $depth+1 );
+				}//if
+				$rtn .= '</li>'."\n";
+			}//foreach 
+			$rtn .= '</ul>'."\n";
+		}//if
+
+		return $rtn;
+	}
+
+	/**
 	 * ショルダーナビのリストを取得
 	 */
 	public function get_shouldernavi_list(){

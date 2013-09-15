@@ -48,26 +48,21 @@
 	$local_bros_page_info = $obj_custom_theme->get_gnavi_category_list();
 ?>
 
-<?php if( count($local_bros_page_info) ){ ?>
-<ul>
-<?php foreach( $local_bros_page_info as $local_page_id ){ ?>
-<?php $local_page_info = $px->site()->get_page_info($local_page_id); ?>
-<li><?php print $px->theme()->mk_link($local_page_info['path']); ?>
-<?php if( $px->site()->is_page_in_breadcrumb( $local_page_info['id'] ) ){ ?>
-<?php $local_children = $px->site()->get_children( $local_page_info['id'] ); ?>
-<?php if( count($local_children) ){ ?>
-<ul>
-<?php foreach( $local_children as $local_child_page_id ){ ?>
-<?php $local_child_page_info = $px->site()->get_page_info($local_child_page_id); ?>
-<li><?php print $px->theme()->mk_link($local_child_page_info['path']); ?></li>
-<?php }//foreach ?>
-</ul>
-<?php }//if ?>
-<?php }//if ?>
-</li>
-<?php }//foreach ?>
-</ul>
-<?php }//if ?>
+<?php
+if( count($local_bros_page_info) ){
+	print '<ul>'."\n";
+	foreach( $local_bros_page_info as $local_page_id ){
+		$local_page_info = $px->site()->get_page_info($local_page_id);
+		print '<li>';
+		print $px->theme()->mk_link($local_page_info['path']);
+		if( $px->site()->is_page_in_breadcrumb( $local_page_info['id'] ) ){
+			print $obj_custom_theme->mk_html_gnavi( $local_page_info['id'], 1 );
+		}
+		print '</li>'."\n";
+	}//foreach
+	print '</ul>'."\n";
+}//if
+?>
 </div><!-- /.theme_localnavi -->
 
 </div><!-- /.theme_column2 -->
