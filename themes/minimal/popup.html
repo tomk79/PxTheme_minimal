@@ -2,6 +2,8 @@
 	//↓ $page_info にページの情報を格納しています。
 	//	 test::var_dump( $page_info ); で、変数の内容を確認できます。
 	$page_info = $this->px->site()->get_current_page_info();
+	$tmp_class_name = $px->load_pxtheme_class('/custom/funcs.php');
+	$obj_custom_theme = new $tmp_class_name($this->px);
 ?><!doctype html>
 <html>
 <head>

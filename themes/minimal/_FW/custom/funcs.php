@@ -12,7 +12,40 @@ class pxtheme_custom_funcs{
 	 */
 	public function __construct( $px ){
 		$this->px = $px;
+		$this->px->path_theme_files();
 	}//__construct()
+
+	/**
+	 * グローバルナビのカテゴリリストを取得
+	 */
+	public function get_gnavi_category_list(){
+		$children = $this->px->site()->get_children('');//トップページの子階層を取得
+		$rtn = array();
+		foreach( $children as $row ){
+			$page_info = $this->px->site()->get_page_info($row);
+			if( !$page_info['category_top_flg'] ){
+				continue;
+			}
+			array_push( $rtn, $row );
+		}
+		return $rtn;
+	}
+
+	/**
+	 * ショルダーナビのリストを取得
+	 */
+	public function get_shouldernavi_list(){
+		$children = $this->px->site()->get_children('', array('filter'=>false));//トップページの子階層を取得
+		$rtn = array();
+		foreach( $children as $row ){
+			$page_info = $this->px->site()->get_page_info($row);
+			if( $page_info['category_top_flg'] ){
+				continue;
+			}
+			array_push( $rtn, $row );
+		}
+		return $rtn;
+	}
 
 	/**
 	 * パンくずのHTMLソースを生成する。
@@ -51,6 +84,19 @@ class pxtheme_custom_funcs{
 		$rtn .= '</ul>';
 		return $rtn;
 	}//mk_breadcrumb()
+
+	/**
+	 * デザインスキームを取得
+	 */
+	public function get_design_scheme(){
+		$rtn = array();
+		$rtn['layout.max_witdh'] = 1240;
+		$rtn['colors.main'] = $this->px->get_conf('colors.main');
+		if(!strlen($rtn['colors.main'])){
+			$rtn['colors.main'] = '#000000';
+		}
+		return $rtn;
+	}
 
 }
 
