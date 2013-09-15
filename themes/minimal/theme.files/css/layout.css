@@ -37,6 +37,12 @@ body{
 .theme_header .logo a{
 	text-decoration:none;
 }
+@media all and (max-width: <?php print t::h($scheme['layout.break_point']); ?>px){
+	.theme_header{
+		float:none;
+		width:auto;
+	}
+}
 
 /**
  * 中段
@@ -49,10 +55,25 @@ body{
 	float:left;
 	padding:40px 0;
 }
-
 .theme_middle .theme_column2{
 	width:22%;
 	float:right;
+}
+@media all and (max-width: <?php print t::h($scheme['layout.break_point']); ?>px){
+	.theme_middle .theme_column1{
+		width:auto;
+		float:none;
+		padding-top:5px;
+	}
+	.theme_middle .theme_column1 h1{
+		margin:0.5em 0 0.2em 0;
+	}
+	.theme_middle .theme_column2{
+		width:auto;
+		float:none;
+		border-top:1px solid #000;
+		border-bottom:1px solid #000;
+	}
 }
 
 /**
@@ -103,6 +124,23 @@ body{
 .theme_outline .theme_middle .theme_localnavi ul li li li li a.current{
 	padding-right:70px;
 }
+@media all and (max-width: <?php print t::h($scheme['layout.break_point']); ?>px){
+	.theme_outline .theme_middle .theme_localnavi ul li a{
+		padding-top:10px;
+		padding-bottom:10px;
+	}
+	.theme_outline .theme_middle .theme_localnavi ul{
+		border-bottom:1px solid #eee;
+		margin-top:0;
+		margin-bottom:0;
+	}
+	.theme_outline .theme_middle .theme_localnavi ul li{
+		border-top:1px solid #eee;
+		margin-top:0;
+		margin-bottom:0;
+	}
+}
+
 
 /**
  * ページの先頭へ戻るリンク
@@ -136,11 +174,13 @@ body{
 	padding:20px 10px;
 	font-size:small;
 }
-.theme_megafooter .theme_megafooter-inner{
-	padding-left:-20px;
+.theme_megafooter .theme_megafooter-outline{
 	text-align:left;
 	max-width:<?php print intval($scheme['layout.max_witdh']); ?>px;
 	margin:0 auto;
+}
+.theme_megafooter .theme_megafooter-inner{
+	margin-left:-20px;
 }
 .theme_megafooter .theme_megafooter-cell{
 	float:left;
@@ -149,8 +189,14 @@ body{
 	?>
 	width:<?php print intval(100/count($gnavi_category_list)); ?>%;
 }
+@media all and (max-width: <?php print t::h($scheme['layout.break_point']); ?>px){
+	.theme_megafooter .theme_megafooter-cell{
+		width:50%;
+		margin-bottom:1.5em;
+	}
+}
 .theme_megafooter .theme_megafooter-pad{
-	padding-left:20px;
+	margin-left:20px;
 }
 .theme_megafooter .theme_megafooter-cell p,
 .theme_megafooter .theme_megafooter-cell ul{

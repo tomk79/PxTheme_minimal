@@ -77,7 +77,7 @@ if( count($local_bros_page_info) ){
 	$gnavi_category_list = $obj_custom_theme->get_gnavi_category_list();
 	$src = '';
 	if( count($gnavi_category_list) ){
-		$src .= '<div class="theme_megafooter"><div class="theme_megafooter-inner">';
+		$src .= '<div class="theme_megafooter"><div class="theme_megafooter-outline"><div class="theme_megafooter-inner">';
 		foreach( $gnavi_category_list as $row_page_id){
 			$src .= '<div class="theme_megafooter-cell"><div class="theme_megafooter-pad">';
 			$src .= '<p>'.$this->px->theme()->mk_link($row_page_id).'</p>';
@@ -91,7 +91,7 @@ if( count($local_bros_page_info) ){
 			}
 			$src .= '</div></div>';
 		}
-		$src .= '</div></div><!-- /.theme_megafooter -->';
+		$src .= '</div></div></div><!-- /.theme_megafooter -->';
 	}
 	print $src;
 

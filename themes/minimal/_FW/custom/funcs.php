@@ -120,6 +120,7 @@ class pxtheme_custom_funcs{
 	public function get_design_scheme(){
 		$rtn = array();
 		$rtn['layout.max_witdh'] = 1240;
+		$rtn['layout.break_point'] = 590;
 		$rtn['colors.main'] = $this->px->get_conf('colors.main');
 		if(!strlen($rtn['colors.main'])){
 			$rtn['colors.main'] = '#000000';
