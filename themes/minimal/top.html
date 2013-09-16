@@ -29,6 +29,7 @@
 <style type="text/css">
 .theme_outline{
 	position:absolute;
+	top:0; right:0;
 }
 .theme_top_main{
 	width:44%;
@@ -146,7 +147,7 @@ if( count($local_bros_page_info) ){
 
 
 <div class="theme_footer"><div class="theme_footer-inner">
-	<div class="">(C)<?php print $px->theme()->mk_link('/', $this->px->get_conf('project.name') ); ?>.</div>
+	<div class="">(C)<?php print t::h( $this->px->get_conf('project.name') ); ?>.</div>
 </div></div><!-- /.theme_footer -->
 
 
