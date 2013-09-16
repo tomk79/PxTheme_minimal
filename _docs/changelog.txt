@@ -2,6 +2,11 @@
  * PxFW Theme "minimal"
  */
 
+ [minimal 0.1.0b2 (2013/9/16)]
+
+ - トップページ用のアウトライン top.html を追加。
+
+
  [minimal 0.1.0b1 (2013/9/15)]
 
  - 初回リリース。
