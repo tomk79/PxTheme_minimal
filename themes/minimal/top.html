@@ -4,6 +4,8 @@
 	$page_info = $px->site()->get_current_page_info();
 	$tmp_class_name = $px->load_pxtheme_class('/custom/funcs.php');
 	$obj_custom_theme = new $tmp_class_name($this->px);
+
+	$scheme = $obj_custom_theme->get_design_scheme();
 ?><!doctype html>
 <html>
 <head>
@@ -11,10 +13,65 @@
 <?php /*
 ↓ t::h() は、htmlspecialchars() のショートカットです。
 */ ?>
-<title><?php print t::h($page_info['title']); ?> | <?php print t::h($px->get_conf('project.name')); ?></title>
+<title><?php print t::h($px->get_conf('project.name')); ?></title>
 <?php
 	include( $px->realpath_theme_files().'inc/setup.inc' );
 
+	print '<script type="text/javascript" src="'.t::h( $this->px->path_theme_files('/js/themeFitTopImage.js') ).'"></script>'."\n";
+?>
+<script type="text/javascript">
+(function($){
+	$(window).load(function(){
+		$('.theme_top_mainimage').themeFitTopImage();
+	});
+})(jQuery);
+</script>
+<style type="text/css">
+.theme_outline{
+	position:absolute;
+}
+.theme_top_main{
+	width:44%;
+	margin:0 0 0 auto;
+	padding:0;
+	background-color:#fff;
+	background-color:rgba(255,255,255,0.8);
+	color:#000;
+}
+.theme_contcol{
+	width:48%;
+	font-size:small;
+}
+.theme_header ,
+.theme_navibar{
+	width:48%;
+}
+.theme_footer{
+	font-size:x-small;
+	position:fixed;
+	left:0px; bottom:0px;
+	background-color:#fff;
+	background-color:rgba(255,255,255,0.8);
+}
+@media all and (max-width: <?php print t::h($scheme['layout.break_point']); ?>px){
+	.theme_top_main,
+	.theme_contcol,
+	.theme_header,
+	.theme_navibar{
+		width:auto;
+	}
+	.theme_contcol{
+		font-size:medium;
+	}
+	.theme_top_mainimage{
+		opacity:0.3;
+	}
+	.theme_footer{
+		position:static;
+	}
+}
+</style>
+<?php
 	//↓コンテンツから受け取った
 	//	headセクション内用のソースを出力しています。
 	print $px->theme()->pull_content('head');
@@ -22,14 +79,15 @@
 </head>
 <body id="page_top">
 
+<div class="theme_top_mainimage"><img src="<?php print t::h( $this->px->path_theme_files('/img/topimage.svg') ); ?>" alt="" /></div>
+
 <div class="theme_outline">
+<div class="theme_top_main clearfix">
 <div class="theme_header">
-	<div class="logo"><a href="<?php print t::h( $px->theme()->href('') ); ?>"><?php print t::h($px->get_conf('project.name')); ?></a></div>
+	<div class="logo"><h1><?php print t::h($px->get_conf('project.name')); ?></h1></div>
 	<div class="breadcrumb"><?php print $obj_custom_theme->mk_breadcrumb(); ?></div>
 </div><!-- /.theme_header -->
-<div class="theme_middle">
 <div class="theme_contcol">
-<h1><?php print t::text2html( $page_info['title_h1'] ); ?></h1>
 <div id="content" class="contents">
 
 <?php
@@ -65,40 +123,6 @@ if( count($local_bros_page_info) ){
 ?>
 </div><!-- /.theme_localnavi -->
 
-</div><!-- /.theme_navibar -->
-</div><!-- /.theme_middle -->
-
-<div class="theme_back_to_page_top"><a href="#page_top" class="up">ページの先頭へ戻る</a></div>
-
-</div><!-- /.theme_outline -->
-
-
-<?php
-	$gnavi_category_list = $obj_custom_theme->get_gnavi_category_list();
-	$src = '';
-	if( count($gnavi_category_list) ){
-		$src .= '<div class="theme_megafooter"><div class="theme_megafooter-outline"><div class="theme_megafooter-inner">';
-		foreach( $gnavi_category_list as $row_page_id){
-			$src .= '<div class="theme_megafooter-cell"><div class="theme_megafooter-pad">';
-			$src .= '<p>'.$this->px->theme()->mk_link($row_page_id).'</p>';
-			$children = $this->px->site()->get_children($row_page_id);
-			if( count($children) ){
-				$src .= '<ul>';
-				foreach( $children as $child ){
-					$src .= '<li>'.$this->px->theme()->mk_link($child).'</li>';
-				}
-				$src .= '</ul>';
-			}
-			$src .= '</div></div>';
-		}
-		$src .= '</div></div></div><!-- /.theme_megafooter -->';
-	}
-	print $src;
-
-	unset($src);
-?>
-
-<div class="theme_footer"><div class="theme_footer-inner">
 <?php
 	$src = '';
 	$shouldernavi_list = $obj_custom_theme->get_shouldernavi_list();
@@ -114,9 +138,19 @@ if( count($local_bros_page_info) ){
 	print $src;
 	unset($src);
 ?>
-	<div class="breadcrumb"><?php print $obj_custom_theme->mk_breadcrumb(); ?></div>
-	<div class="theme_footer-copyright">(C)<?php print $px->theme()->mk_link('/', $this->px->get_conf('project.name') ); ?>.</div>
+
+</div><!-- /.theme_navibar -->
+</div><!-- /.theme_top_main -->
+
+
+
+
+<div class="theme_footer"><div class="theme_footer-inner">
+	<div class="">(C)<?php print $px->theme()->mk_link('/', $this->px->get_conf('project.name') ); ?>.</div>
 </div></div><!-- /.theme_footer -->
+
+
+</div><!-- /.theme_outline -->
 
 </body>
 </html>

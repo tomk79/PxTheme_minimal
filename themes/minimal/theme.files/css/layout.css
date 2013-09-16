@@ -20,6 +20,11 @@ body{
 	padding:20px;
 	border-radius:10px;
 }
+@media all and (max-width: <?php print t::h($scheme['layout.break_point']); ?>px){
+	.theme_outline{
+		padding:10px 5px;
+	}
+}
 
 /**
  * ヘッダー
@@ -34,13 +39,20 @@ body{
 	font-size:150%;
 	font-weight:bold;
 }
+.theme_header .logo h1,
 .theme_header .logo a{
 	text-decoration:none;
+	font-size:inherit;
+	display:block;
+	margin:1em 0 0.2em 0;
 }
 @media all and (max-width: <?php print t::h($scheme['layout.break_point']); ?>px){
 	.theme_header{
 		float:none;
 		width:auto;
+	}
+	.theme_header .logo{
+		font-size:110%;
 	}
 }
 
@@ -50,25 +62,26 @@ body{
 .theme_middle{
 	float:none;
 }
-.theme_middle .theme_column1{
+.theme_contcol{
 	width:70%;
 	float:left;
 	padding:40px 0;
 }
-.theme_middle .theme_column2{
+.theme_navibar{
 	width:22%;
 	float:right;
 }
 @media all and (max-width: <?php print t::h($scheme['layout.break_point']); ?>px){
-	.theme_middle .theme_column1{
+	.theme_contcol{
 		width:auto;
 		float:none;
 		padding-top:5px;
 	}
-	.theme_middle .theme_column1 h1{
+	.theme_contcol h1{
 		margin:0.5em 0 0.2em 0;
+		font-size:x-large;
 	}
-	.theme_middle .theme_column2{
+	.theme_navibar{
 		width:auto;
 		float:none;
 		border-top:1px solid #000;
@@ -79,21 +92,21 @@ body{
 /**
  * ローカルナビ
  */
-.theme_outline .theme_middle .theme_localnavi{
+.theme_localnavi{
 	padding:10px 0;
 	text-align:right;
 	font-size:small;
 }
-.theme_outline .theme_middle .theme_localnavi ul{
+.theme_localnavi ul{
 	margin:1px 0;
 	padding:0;
 }
-.theme_outline .theme_middle .theme_localnavi ul li{
+.theme_localnavi ul li{
 	list-style-type:none;
 	margin:1px 0;
 	text-overflow: ellipsis;
 }
-.theme_outline .theme_middle .theme_localnavi ul li a{
+.theme_localnavi ul li a{
 	display:block;
 	direction: ltr;
 	overflow:hidden;
@@ -101,40 +114,40 @@ body{
 	text-overflow: ellipsis;
 	padding:2px 10px;
 }
-.theme_outline .theme_middle .theme_localnavi ul li a:hover,
-.theme_outline .theme_middle .theme_localnavi ul li a.current{
+.theme_localnavi ul li a:hover,
+.theme_localnavi ul li a.current{
 	background-color:#eee;
 }
-.theme_outline .theme_middle .theme_localnavi ul li li a{
+.theme_localnavi ul li li a{
 	font-size:80%;
 	padding-right:30px;
 }
-.theme_outline .theme_middle .theme_localnavi ul li li a:hover,
-.theme_outline .theme_middle .theme_localnavi ul li li a.current{
+.theme_localnavi ul li li a:hover,
+.theme_localnavi ul li li a.current{
 	background-color:#f5f5f5;
 	padding-right:30px;
 }
-.theme_outline .theme_middle .theme_localnavi ul li li li a,
-.theme_outline .theme_middle .theme_localnavi ul li li li a:hover,
-.theme_outline .theme_middle .theme_localnavi ul li li li a.current{
+.theme_localnavi ul li li li a,
+.theme_localnavi ul li li li a:hover,
+.theme_localnavi ul li li li a.current{
 	padding-right:50px;
 }
-.theme_outline .theme_middle .theme_localnavi ul li li li li a,
-.theme_outline .theme_middle .theme_localnavi ul li li li li a:hover,
-.theme_outline .theme_middle .theme_localnavi ul li li li li a.current{
+.theme_localnavi ul li li li li a,
+.theme_localnavi ul li li li li a:hover,
+.theme_localnavi ul li li li li a.current{
 	padding-right:70px;
 }
 @media all and (max-width: <?php print t::h($scheme['layout.break_point']); ?>px){
-	.theme_outline .theme_middle .theme_localnavi ul li a{
+	.theme_localnavi ul li a{
 		padding-top:10px;
 		padding-bottom:10px;
 	}
-	.theme_outline .theme_middle .theme_localnavi ul{
+	.theme_localnavi ul{
 		border-bottom:1px solid #eee;
 		margin-top:0;
 		margin-bottom:0;
 	}
-	.theme_outline .theme_middle .theme_localnavi ul li{
+	.theme_localnavi ul li{
 		border-top:1px solid #eee;
 		margin-top:0;
 		margin-bottom:0;
@@ -227,6 +240,7 @@ body{
 .theme_footer_shouldernavi{
 	clear:both;
 	margin:1em auto;
+	font-size:small;
 }
 .theme_footer_shouldernavi ul ,
 .theme_footer_shouldernavi ul li{
@@ -237,6 +251,17 @@ body{
 	display:inline;
 }
 .theme_footer_shouldernavi ul li a{
+}
+@media all and (max-width: <?php print t::h($scheme['layout.break_point']); ?>px){
+	.theme_footer_shouldernavi ul li{
+		display:block;
+		margin-bottom:1px;
+		text-align:left;
+	}
+	.theme_footer_shouldernavi ul li a{
+		display:block;
+		padding:0.5em 1em;
+	}
 }
 
 /**
